@@ -2,8 +2,20 @@
 
 require_once("./data.php");
 
+$newMusk = array(
+    "id" => 5, 
+    "name" => "Albert", 
+    "strength" => 12, 
+    "agility" => 12, 
+    "intelligence" => 12, 
+    "tribe" => "Parmagnan", 
+    "class" => "Mousquetaire");
+array_push($data, $newMusk);
+
 $id = isset($_GET["id"]) ? intval($_GET["id"]) : null;
 $int_min = isset($_GET["intelligence"]) ? intval($_GET["intelligence"]) : null;
+
+
 
 function getMuskById(int $id, $data) : Array {
     return $data[$id];
