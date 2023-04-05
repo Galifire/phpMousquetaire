@@ -1,21 +1,13 @@
 <?php
 
 require_once("./data.php");
+require_once("./Mousquetaire.php");
 
-$newMusk = array(
-    "id" => 5, 
-    "name" => "Albert", 
-    "strength" => 12, 
-    "agility" => 12, 
-    "intelligence" => 12, 
-    "tribe" => "Parmagnan", 
-    "class" => "Mousquetaire");
+$newMusk = new Mousquetaire(5, "Albert", 12, 12, 12, "Parmagnan", "Mousquetaire");
 array_push($data, $newMusk);
 
 $id = isset($_GET["id"]) ? intval($_GET["id"]) : null;
 $int_min = isset($_GET["intelligence"]) ? intval($_GET["intelligence"]) : null;
-
-
 
 function getMuskById(int $id, $data) : Array {
     return $data[$id];
@@ -32,7 +24,7 @@ function getAllMusks($data) : Array {
 function getMuskByIntelligence(int $int_min, $data) : Array|null {
     $musks = null;
     for ($i = 1; $i < count($data)+1; $i++) {
-        if ($data[$i]["intelligence"] >= $int_min) {
+        if ($data[$i]->getIntelligence() >= $int_min) {
             $musks[] = $data[$i];
         }
     }
@@ -61,8 +53,8 @@ if ($id != null) {
 } else {
     $musks = getAllMusks($data);
     foreach($musks as $musk) {
-        foreach($musk as $m => $value) {
-            echo $m . " : " . $value ."<br>";
+        foreach($musk as $m) {
+            echo $m->toString() . "<br>";
         }
        
     }
