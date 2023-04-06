@@ -1,14 +1,14 @@
-CREATE TABLE 'characters' (
-'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-'name' TEXT NOT NULL,
-'strength' INTEGER NOT NULL,
-'agility' INTEGER NOT NULL,
-'intelligence' INTEGER NOT NULL,
-'tribe' TEXT,
-'class' TEXT NOT NULL DEFAULT 'warrior'
-);
+CREATE TABLE `characters` (
+    `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `name` varchar(30) NOT NULL,
+    `strength` int(5) NOT NULL,
+    `agility` int(5) NOT NULL,
+    `intelligence` int(5) NOT NULL,
+    `tribe` varchar(30),
+    `class` varchar(25) NOT NULL DEFAULT 'warrior'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO characters (name, strength, agility, intelligence, tribe, class) VALUES ("Jérémy",9,10,5,"Viking du Sud","warrior");
+INSERT INTO characters (name, strength, agility, intelligence, tribe, class) VALUES ("Jeremy",9,10,5,"Viking du Sud","warrior");
 INSERT INTO characters (name, strength, agility, intelligence, tribe, class) VALUES ("Robin",8,10,10,null,"magician");
 INSERT INTO characters (name, strength, agility, intelligence, tribe, class) VALUES ("Loïs",8,10,5,"Viking du Nord","warrior");
 INSERT INTO characters (name, strength, agility, intelligence, tribe, class) VALUES ("Lucas",7,9,5,"Viking de l'Est","warrior");
