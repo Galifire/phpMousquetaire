@@ -2,71 +2,138 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire</title>
 </head>
+
 <body>
     <form action="./form.php" method="POST">
+        <fieldset>
+            <legend>Location de Véhicule</legend>
 
         <label for="immatriculation">Immatriculation</label>
-        <input type="text" id="immatriculation" name="immatriculation"><br>
+        <input type="text" name="immatriculation" value=<?php
+        if (!empty($_POST["immatriculation"])) {
+            var_dump($_POST["immatriculation"]);
+        }
+        ?>>
+        <br>
 
         <label for="type">Type</label>
-        <input type="list" id="types" name="types" list="typesDL" placeholder="Choisissez un type de location">
-        <datalist id="typesDL">
-            <option value="Touristique">
-            <option value="Travail">
-            <option value="Dépannage">
-        </datalist><br>
+        <select name="types">
+            <option name="types" value="Choisir">Choisir</option>
+            <option name="types" value="Touristique" 
+            <?php if (!empty($_POST['types'] == 'Touristique')) { ?>
+            selected="true" 
+            <?php }; ?>>Touristique</option>
+            <option name="types" value="Travail" 
+            <?php if (!empty($_POST['types'] == 'Travail')) { ?>
+            selected="true" <?php }; ?>>Travail
+            </option>
+            <option name="types" value="Dépannage" 
+            <?php if (!empty($_POST['types'] == 'Dépannage')){ ?>
+            selected="true" <?php }; ?>>
+                Dépannage</option>
+        </select><br>
+
 
         <label>Énergie</label><br>
-        <input type="radio" name="energie" id="energie" value="Essence"><label for="energie">Essence</label><br>
-        <input type="radio" name="energie" id="energie" value="Diesel"><label for="energie">Diesel</label><br>
-        <input type="radio" name="energie" id="energie" value="GPL"><label for="energie">GPL</label><br>
-        <input type="radio" name="energie" id="energie" value="Bioéthanol"><label for="energie">Bioéthanol</label><br>
+        <input type="radio" name="model[energie]" value="Essence" <?php
+        if (isset($_POST['model[energie]']) && $_POST['model[energie]'] == "Essence") {
+            echo 'checked';
+        }
+        ;
+        ?>>
+        <label for="energie">Essence</label><br>
+
+        <input type="radio" name="model[energie]" value="Diesel" <?php
+        if (isset($_POST['model[energie]']) && $_POST['model[energie]'] == "Diesel") {
+            echo 'checked';
+        }
+        ;
+        ?>>
+        <label for="energie">Diesel</label><br>
+
+        <input type="radio" name="model[energie]" value="GPL" <?php
+        if (isset($_POST['model[energie]']) && $_POST['model[energie]'] == "GPL") {
+            echo 'checked';
+        }
+        ;
+        ?>>
+        <label for="energie">GPL</label><br>
+
+        <input type="radio" name="model[energie]" value="Bioéthanol" <?php
+        if (isset($_POST['model[energie]']) && $_POST['model[energie]'] == "Bioéthanol") {
+            echo 'checked';
+        }
+        ;
+        ?>>
+        <label for="energie">Bioéthanol</label><br>
 
         <label for="kilometrage">Kilométrage</label>
-        <input id="kilometrage" name="kilometrage" type="text"><br>
+        <input id="kilometrage" name="kilometrage" type="text" value=<?php
+        if (!empty($_POST["kilometrage"])) {
+            echo $_POST["kilometrage"];
+        }
+        ?>><br>
 
         <label for="nbjours" type="number">Nombre de jours</label>
-        <input id="nbjours" name="kilometrage" type="number"><br>
+        <input id="nbjours" name="nbjours" type="number" value=<?php
+        if (!empty($_POST["nbjours"])) {
+            echo $_POST["nbjours"];
+        }
+        ?>><br>
 
         <label for="assurance">Assurance</label>
-        <input id="assurance" name="assurance" type="checkbox"><br>
+        <input id="assurance" name="assurance" type="checkbox" <?php
+        if (isset($_POST['assurance']))
+            echo "checked";
+        ?>><br>
 
-        <input id="reset" name="reset" type="reset">
-        <input id="submit" name="submit" type="submit" valueonclick="checkValues">
+        <input id="reset" name="reset" value="Réinitialiser" type="reset">
+        <input id="submit" name="submit" value="Valider" type="submit">
+        </fieldset>
     </form>
 
-<?php
-function checkValues() {
-    $immatriculation = $_POST['immatriculation'];
-    $type = $_POST['type'];
-    $energie = $_POST['energie'];
-    $kilometrage = $_POST['kilometrage'];
-    $nbjours = $_POST['nbjours'];
-    $assurance = $_POST['assurance'];
-
-    if (empty($immatriculation)) {
-        echo "L'immatriculation est obligatoire";
-    } else if (empty($type)) {
-        echo "Le type est obligatoire";
-    } else if (empty($energie)) {
-        echo "L'énergie est obligatoire";
-    } else if (empty($kilometrage)) {
-        echo "Le kilométrage est obligatoire";
-    } else if (empty($nbjours)) {
-        echo "Le nombre de jours est obligatoire";
-    } else if (empty($assurance)) {
-        echo "L'assurance est obligatoire";
-    } else {
-        echo "Tout est bon";
+    <?php
+    var_dump($_POST);
+    /*
+    // Required field names
+    $required = array('immatriculation', 'types', 'energie', 'kilometrage', 'nbjours', 'assurance');
+    // Loop over field names, make sure each one exists and is not empty
+    if ($_POST['types'] == 'Choisir') {
+    $post['types'] = null;
     }
-}
-
-?>
+    $error = false;
+    foreach ($required as $field) {
+    if (empty($_POST[$field])) {
+    switch ($field) {
+    case 'immatriculation':
+    echo "L'immatriculation est obligatoire.<br>";
+    break;
+    case 'types':
+    echo "Le type est obligatoire.<br>";
+    break;
+    case 'energie':
+    echo "L'énergie est obligatoire.<br>";
+    break;
+    case 'kilometrage':
+    echo "Le kilométrage est obligatoire.<br>";
+    break;
+    case 'nbjours':
+    echo "Le nombre de jours est obligatoire.<br>";
+    break;
+    case 'assurance':
+    $_POST['assurance'] = false;
+    break;
+    }
+    }
+    }*/
+    ?>
 </body>
+
 </html>
