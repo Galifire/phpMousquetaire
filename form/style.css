@@ -1,0 +1,38 @@
+/* Applique une bordure grise autour du formulaire */
+form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  /* Stylise les étiquettes de champ de formulaire */
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  /* Stylise les champs de formulaire */
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* Stylise le bouton de soumission */
+  input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Ajoute un effet de survol au bouton de soumission */
+  input[type="submit"]:hover {
+    background-color: #0062cc;
+  }

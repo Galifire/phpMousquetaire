@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
     <title>Formulaire</title>
 </head>
 
@@ -26,18 +27,20 @@
         <label for="type">Type</label>
         <select name="types">
             <option name="types" value="Choisir">Choisir</option>
-            <option name="types" value="Touristique" 
-            <?php if (!empty($_POST['types'] == 'Touristique')) { ?>
-            selected="true" 
-            <?php }; ?>>Touristique</option>
-            <option name="types" value="Travail" 
-            <?php if (!empty($_POST['types'] == 'Travail')) { ?>
-            selected="true" <?php }; ?>>Travail
-            </option>
-            <option name="types" value="Dépannage" 
-            <?php if (!empty($_POST['types'] == 'Dépannage')){ ?>
-            selected="true" <?php }; ?>>
-                Dépannage</option>
+            <option name="types" value="Touristique" <?php 
+            if (!empty($_POST['types']) && $_POST['types'] == 'Touristique') {
+                echo 'selected';
+            } ?>>Touristique</option>
+
+            <option name="types" value="Travail" <?php 
+            if (!empty($_POST['types']) && $_POST['types'] == 'Travail') {
+                echo 'selected';
+            } ?>>Travail</option>
+
+            <option name="types" value="Dépannage" <?php 
+            if (!empty($_POST['types']) && $_POST['types'] == 'Dépannage') {
+                echo 'selected';
+            } ?>>Dépannage</option>
         </select><br>
 
 

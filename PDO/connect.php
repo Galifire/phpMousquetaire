@@ -1,7 +1,7 @@
 <?php
 
 $user = 'root';
-$pwd = '123+aze';
+$pwd = '';
 try {
     $dbh = new PDO('sqlite:example.db');
 } catch (PDOException $e) {
